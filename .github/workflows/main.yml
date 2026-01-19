@@ -17,17 +17,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Flutter (Latest Stable)
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.1'
+          flutter-version: '3.22.0' # একদম স্ট্যাবল ভার্সন
           channel: 'stable'
 
-      # নতুন প্রজেক্ট তৈরি
       - name: Create Base Project
         run: flutter create temp_app --org com.oriby.mxlive --project-name mxlive
 
-      # কোড ইনজেকশন
       - name: Inject Your Code
         run: |
           rm -rf temp_app/lib/*
@@ -35,8 +33,8 @@ jobs:
           cp pubspec.yaml temp_app/
           cp -r assets temp_app/
 
-      # [FIX 1] settings.gradle এ জোর করে Kotlin 2.0.21 সেট করা
-      - name: Force Kotlin 2.0 in Settings
+      # [FIX] আমরা নিরাপদ Kotlin 1.9.24 ব্যবহার করছি (যা কখনো ফেইল করে না)
+      - name: Set Stable Kotlin Version
         working-directory: ./temp_app
         run: |
           cat <<EOF > android/settings.gradle
@@ -60,20 +58,19 @@ jobs:
 
           plugins {
               id "dev.flutter.flutter-plugin-loader" version "1.0.0"
-              id "com.android.application" version "8.3.0" apply false
-              id "org.jetbrains.kotlin.android" version "2.0.21" apply false
+              id "com.android.application" version "8.2.0" apply false
+              id "org.jetbrains.kotlin.android" version "1.9.24" apply false
           }
 
           include ":app"
           EOF
 
-      # [FIX 2] Gradle Wrapper জোর করে 8.4 করা
-      - name: Force Gradle 8.4
+      # [FIX] Gradle 8.2 ব্যবহার করা হচ্ছে (Kotlin 1.9 এর সাথে বেস্ট ম্যাচ)
+      - name: Set Stable Gradle Version
         working-directory: ./temp_app
         run: |
-           sed -i 's/distributionUrl=.*$/distributionUrl=https\:\/\/services.gradle.org\/distributions\/gradle-8.4-all.zip/g' android/gradle/wrapper/gradle-wrapper.properties
+           sed -i 's/distributionUrl=.*$/distributionUrl=https\:\/\/services.gradle.org\/distributions\/gradle-8.2-all.zip/g' android/gradle/wrapper/gradle-wrapper.properties
 
-      # [FIX 3] MinSDK ফিক্স
       - name: Fix Android MinSdkVersion
         working-directory: ./temp_app
         run: |
