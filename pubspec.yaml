@@ -1,0 +1,47 @@
+name: mxlive
+description: A new Flutter project for live streaming.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ডিফল্ট আইকন প্যাকেজ
+  cupertino_icons: ^1.0.2
+
+  # নেটওয়ার্ক রিকোয়েস্ট (API call) এর জন্য
+  http: ^1.2.0
+
+  # ভিডিও প্লেব্যাক এর জন্য
+  video_player: ^2.8.2
+  chewie: ^1.7.5
+
+  # স্ক্রলিং টেক্সট (নোটিশ) এর জন্য
+  marquee: ^2.2.3
+
+  # টেলিগ্রাম লিংক খোলার জন্য
+  url_launcher: ^6.2.4
+
+  # চ্যানেল লোগো বা ইমেজ ক্যাশ করার জন্য
+  cached_network_image: ^3.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # কোড লিন্টিং এর জন্য
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  # এখানে লোগো পাথ ডিক্লেয়ার করা হয়েছে
+  assets:
+    - assets/logo.png
+    # অথবা পুরো ফোল্ডারটি অ্যাড করতে চাইলে নিচের লাইনটি ব্যবহার করতে পারেন:
+    # - assets/
