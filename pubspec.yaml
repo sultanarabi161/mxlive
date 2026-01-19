@@ -9,19 +9,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # নেটওয়ার্কিং এবং পার্সিং
+  # নেটওয়ার্কিং
   http: ^1.2.1
-  # ভিডিও প্লেয়ার (লেটেস্ট)
-  video_player: ^2.8.6
-  chewie: ^1.8.1
-  # ডিজাইন ও ইউটিলিটি
-  google_fonts: ^6.2.1
+  # ভিডিও প্লেয়ার (একটু পুরোনো কিন্তু স্ট্যাবল ভার্সন দেওয়া হলো)
+  video_player: ^2.8.2
+  chewie: ^1.7.5
+  # ডিজাইন
+  google_fonts: ^6.1.0
   marquee: ^2.2.3
   cached_network_image: ^3.3.1
-  url_launcher: ^6.2.6
+  url_launcher: ^6.2.5
   cupertino_icons: ^1.0.6
-  # আইকন জেনারেটর (অটোমেটিক)
   flutter_launcher_icons: ^0.13.1
+
+# [MAGIC FIX] এই অংশটিই আসল কাজ করবে
+# এটি সমস্যাযুক্ত প্যাকেজগুলোকে পুরোনো ও স্ট্যাবল ভার্সনে আটকে রাখবে
+dependency_overrides:
+  package_info_plus: ^8.0.0
+  device_info_plus: ^10.0.0
+  win32: ^5.0.0
 
 dev_dependencies:
   flutter_test:
